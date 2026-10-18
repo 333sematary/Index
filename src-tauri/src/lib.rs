@@ -1784,6 +1784,14 @@ pub fn run() {
             }
         }).build())
         .setup(|app| {
+            // Apply the packaged icon to the native window as well as the executable,
+            // so Windows taskbar buttons show the Index magnifier.
+            if let (Some(window), Some(icon)) = (
+                app.get_webview_window("main"),
+                app.default_window_icon(),
+            ) {
+                window.set_icon(icon.clone())?;
+            }
             let db_path: PathBuf = app.path().app_data_dir()?.join("index.sqlite3");
             let db=Arc::new(Mutex::new(init_db(&db_path).expect("initialize Index database")));
             let shortcut: String = { let connection=db.lock().map_err(|e|e.to_string())?; connection.query_row("SELECT value FROM settings WHERE key='global_shortcut'",[],|r|r.get(0)).optional()?.unwrap_or_else(||"CTRL+SHIFT+SPACE".into()) };

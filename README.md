@@ -38,7 +38,7 @@ Build a desktop bundle:
 npm run tauri build
 ```
 
-On Windows, the build produces an MSI installer at `src-tauri/target/release/bundle/msi/Index_0.1.0_x64_en-US.msi` (and an NSIS installer). The app icon source is `src-tauri/icons/index.svg`; generated platform icons are stored alongside it.
+On Windows, the build produces an MSI installer at `src-tauri/target/release/bundle/msi/Index_0.1.1_x64_en-US.msi` (and an NSIS installer). The app icon source is `src-tauri/icons/index.svg`; generated platform icons are stored alongside it.
 
 Run backend tests:
 
