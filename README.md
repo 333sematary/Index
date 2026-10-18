@@ -1,50 +1,92 @@
-# Index
+<div align="center">
+  <img src="src-tauri/icons/index.svg" width="54" alt="Index magnifying glass icon" />
+  <h1>Index</h1>
+  <p>A small, local-first search palette for files, symbols, and code.</p>
+  <p>
+    <a href="https://github.com/333sematary/index-local-code-search/releases/latest">Download for Windows</a>
+    ·
+    <a href="https://github.com/333sematary/index-local-code-search/releases">Releases</a>
+    ·
+    <a href="#development">Build from source</a>
+  </p>
+</div>
 
-Index is a local-first desktop code search tool built with Tauri 2, Rust, SQLite, and TypeScript. Project folders and their indexed source contents stay on this machine; Index does not upload code or require an account.
+<p align="center">
+  <img src="docs/assets/search-demo.gif" width="900" alt="Illustrated Index search flow using matching source lines from this repository" />
+</p>
 
-## Features
+> The animation is an illustration of the real palette, not a screen recording. Its example matches come from this repository's source.
 
-- Add project folders with the native folder picker.
-- Recursively index common source, markup, and configuration files. `.gitignore`, `.git/info/exclude`, hidden entries, and ignored build/dependency folders are respected.
-- Store file text and metadata in a SQLite database in the operating system's application data directory.
-- Reuse unchanged file records by content hash, update changed files, and remove deleted files on refresh. A recursive filesystem watcher batches changes and refreshes affected project roots; watcher errors trigger a recovery scan.
-- Search files and symbols with ranked exact, prefix, subsequence, and small-edit-distance fuzzy matching. Content uses SQLite FTS5 trigram search and also includes fuzzy filename matches.
-- Extract real symbols with Tree-sitter for Rust, TypeScript/TSX, JavaScript/JSX, and Lua. Symbol results show kind and declaration line. Other indexed languages remain available for file and content search without being presented as symbol-supported.
-- Open results at their line in VS Code, Visual Studio, or Neovim. Automatic mode checks for VS Code first and Visual Studio second on Windows; Neovim can use a GUI frontend or Windows Terminal. Editor executables and the global shortcut can be changed in Settings; the default global shortcut is `CTRL+SHIFT+SPACE`. If an editor cannot start, Index falls back to the platform file handler.
-- The global shortcut focuses the existing window; single-instance handling reuses that window when Index is launched again.
+<p align="center">
+  <img src="docs/assets/palette-preview.png" width="760" alt="Illustrated Index search palette with local code results" />
+</p>
 
-Index opens as a compact, borderless search palette. `Ctrl+K` focuses search, `Ctrl+P` opens project selection, arrow keys move through results, and Enter opens the selected file. Symbol mode recognizes common declaration forms in supported languages; it does not yet build a complete language-server symbol graph.
+## Local code search, one shortcut away
 
-Index skips files larger than 1 MB and files that are not valid UTF-8. It never edits project files or sends source code to a service. Filesystem notifications are debounced; reconciliation reuses content hashes so unchanged records and symbols are not rewritten.
+Open Index with the global shortcut, type a filename, symbol, or code fragment, then press **Enter** to open the selected match at its line. Index is a compact Tauri desktop app; your project files stay on your machine.
+
+### What it can search
+
+| Mode | Finds |
+| --- | --- |
+| **Files** | File names, including fuzzy matches for partial names and small typos. |
+| **Symbols** | Functions, types, and other declarations parsed from Rust, TypeScript/TSX, JavaScript/JSX, and Lua. |
+| **Content** | Source text and snippets, ranked locally with SQLite FTS5. |
+
+Content results can be combined with an extension or project filter. Search also ranks exact, prefix, subsequence, and small-edit-distance matches to keep short queries useful.
+
+### Built for daily use
+
+- A filesystem watcher updates only changed files and batches nearby events. Refresh scans recover from watcher errors.
+- SQLite stores the local index. Content hashes let refresh skip unchanged files.
+- `.gitignore`, `.git/info/exclude`, hidden entries, and common generated folders are respected.
+- Files larger than 1 MB and files that are not valid UTF-8 are skipped safely.
+- Open results in VS Code, Visual Studio, or Neovim at the matching line. Automatic mode checks VS Code first, then Visual Studio; configure an executable in Settings if detection does not find your editor.
+- A configurable global shortcut focuses the existing palette instead of creating another window.
+
+### Keyboard
+
+| Shortcut | Action |
+| --- | --- |
+| `Ctrl+Shift+Space` | Show Index and focus search (default global shortcut). |
+| `Ctrl+K` | Focus search. |
+| `Ctrl+P` | Choose or add a project folder. |
+| `↑` / `↓` | Move through results. |
+| `Enter` | Open the selected result at its line. |
+| `Esc` | Close a popup or clear the current query. |
+
+## Install
+
+Download the [Windows MSI](https://github.com/333sematary/index-local-code-search/releases/latest/download/Index_0.1.1_x64_en-US.msi) from the latest release and run it. Windows builds use WebView2.
 
 ## Development
 
-Prerequisites: Node.js/npm, Rust with the Windows MSVC toolchain (Windows) or a supported Linux Rust toolchain, and Tauri 2 platform prerequisites. Windows builds use the installed WebView2 runtime.
+Prerequisites: Node.js/npm, Rust, and the Tauri 2 platform prerequisites. On Windows, use the MSVC Rust toolchain. For Linux, install GTK and WebKitGTK development packages as described in the [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/).
 
 ```sh
 npm install
 npm run tauri dev
 ```
 
-Build the frontend:
+Build the frontend or desktop bundle:
 
 ```sh
 npm run build
-```
-
-Build a desktop bundle:
-
-```sh
 npm run tauri build
 ```
 
-On Windows, the build produces an MSI installer at `src-tauri/target/release/bundle/msi/Index_0.1.1_x64_en-US.msi` (and an NSIS installer). The app icon source is `src-tauri/icons/index.svg`; generated platform icons are stored alongside it.
-
-Run backend tests:
+On Windows, Tauri produces an MSI and an NSIS installer under `src-tauri/target/release/bundle/`. Run the backend tests with:
 
 ```sh
 cargo test --manifest-path src-tauri/Cargo.toml
 ```
 
-For Linux, install Tauri's GTK/WebKitGTK and app indicator development prerequisites as described in the official Tauri 2 prerequisites documentation. Make sure `code` or `nvim` is on PATH, or set its executable path in Index Settings.
+## Local by design
 
+Index does not require an account, contact an indexing service, or upload project contents. It does not edit source files. SQLite data is stored in the operating system's application data directory.
+
+## License and contact
+
+Index is licensed under the [MIT License](LICENSE). Third-party dependencies keep the licenses declared by their respective package and crate metadata.
+
+Built by **Bernardo Brunelli** · Discord: `3yck` · [bernardolbrunelli@gmail.com](mailto:bernardolbrunelli@gmail.com)

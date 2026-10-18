@@ -2,7 +2,9 @@
 name = "index-app"
 version = "0.1.1"
 description = "Local-first code search"
-authors = ["Index"]
+authors = ["Bernardo Brunelli <bernardolbrunelli@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/333sematary/index-local-code-search"
 edition = "2021"
 
 [lib]

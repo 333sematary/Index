@@ -2,6 +2,12 @@
   "name": "index-local-code-search",
   "private": true,
   "version": "0.1.1",
+  "license": "MIT",
+  "author": "Bernardo Brunelli <bernardolbrunelli@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/333sematary/index-local-code-search.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
