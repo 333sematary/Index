@@ -89,4 +89,4 @@ Index does not require an account, contact an indexing service, or upload projec
 
 Index is licensed under the [MIT License](LICENSE). Third-party dependencies keep the licenses declared by their respective package and crate metadata.
 
-Built by **Bernardo Brunelli** · Discord: `3yck` · [bernardolbrunelli@gmail.com](mailto:bernardolbrunelli@gmail.com)
+Built by **3yck** · Discord: `3yck` · [bernardolbrunelli@gmail.com](mailto:333sematary@gmail.com)
