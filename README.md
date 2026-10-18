@@ -1,6 +1,6 @@
 <div align="center">
   <img src="src-tauri/icons/index.svg" width="54" alt="Index magnifying glass icon" />
-  <h1>Trace</h1>
+  <h1>Index</h1>
   <p>A small, local-first search palette for files, symbols, and code.</p>
   <p>
     <a href="https://github.com/333sematary/index-local-code-search/releases/latest">Download for Windows</a>
