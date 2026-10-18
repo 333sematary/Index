@@ -1,0 +1,32 @@
+[package]
+name = "index-app"
+version = "0.1.0"
+description = "Local-first code search"
+authors = ["Index"]
+edition = "2021"
+
+[lib]
+name = "index_app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rusqlite = { version = "0.32", features = ["bundled"] }
+walkdir = "2"
+ignore = "0.4"
+blake3 = "1"
+thiserror = "2"
+tree-sitter = "0.25.10"
+tree-sitter-rust = "0.24.2"
+tree-sitter-typescript = "0.23.2"
+tree-sitter-javascript = "0.25.0"
+tree-sitter-lua = "0.5.0"
+notify = "8.2.0"
+tauri-plugin-global-shortcut = "2.3.0"
+tauri-plugin-single-instance = "2.3.0"
